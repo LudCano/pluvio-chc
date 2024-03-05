@@ -73,6 +73,10 @@ pluviomanual = manual.pluvio.astype(float)
 manual["d_pluv"] = pluviomanual - manual.acum
 manual["d_pluv2"] = pluviomanual - manual.acum_m1
 
+# Guardando archivo final
+manual.to_csv("outputs/processed.csv", index = False)
+
+
 # Cantidad de eventos registrados por observador
 bxdata = []; bxdata2 = []; names_wcount = []; obs_names = []
 for j in observers:
@@ -94,14 +98,16 @@ ax.axhline(0, c = "k", lw = 0.5, alpha = .5)
 ax.set_xticklabels(names_wcount) #solo nombres
 ax.set_ylabel("p_obs - p_auto")
 ax.set_title(f"Diferencia entre medidas\n{date_start} al {date_fin}")
+fig.savefig("outputs/boxplot1.png")
 
 
-
-fig, ax2 = plt.subplots(1,1)
+fig2, ax2 = plt.subplots(1,1)
 ax2.boxplot(bxdata2)
 ax2.axhline(0, c = "k", lw = 0.5, alpha = .5)
 ax2.set_xticklabels(names_wcount) #mostradno nombres con contador
 #ax2.set_xticklabels(obs_names)    #mostrando solo nombres
 ax2.set_ylabel("p_obs - p_auto")
 ax2.set_title(f"Diferencia entre medidas + 1 hora\n{date_start} al {date_fin}")
+fig2.savefig("outputs/boxplot2.png")
+
 plt.show()
