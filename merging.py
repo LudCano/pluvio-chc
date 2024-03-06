@@ -1,11 +1,11 @@
 ## CODIGO DE CORRELACION ENTRE TABLAS
 ## ---------------------------------------
 ## PARAMETROS EJECUCION
-date_start  = "2022-01-01"            #fecha de inicio
-date_fin    = "2022-12-31"            #fecha de fin
+date_start  = "2023-01-01"            #fecha de inicio
+date_fin    = "2023-12-31"            #fecha de fin
 manual_path = "data/manual.csv"       #ruta a archivo procesado pluvio manual
 auto_path   = "data/automatico.csv"   #ruta a archivo procesado pluvio automatico
-threshold   = 10                       #cantidad de eventos para tomar en cuenta un observador
+threshold   = 1                       #cantidad de eventos para tomar en cuenta un observador
 ## ---------------------------------------
 
 # Librerias
@@ -79,6 +79,7 @@ manual.to_csv("outputs/processed.csv", index = False)
 
 # Cantidad de eventos registrados por observador
 bxdata = []; bxdata2 = []; names_wcount = []; obs_names = []
+dfs = []
 for j in observers:
     aux = manual[manual.observador == j]
     print(j, len(aux))
