@@ -36,7 +36,10 @@ for i in range(2015,2025): #el limite sup es exclusivo
     lst_dfs.append(aux)
     
 dff = pd.concat(lst_dfs, axis=0)
+dff2 = dff.copy()
 dff.columns = ["fecha", "h0", "hf", "pluvio", "observador"] #renombrando columnas a nombres mas cortos
+dff2.columns = ["fecha", "h0", "hf", "pluvio", "observador"] #renombrando columnas a nombres mas cortos
+
 # -------------------
 ## ELIMINACION DE NANS
 # Solo importan los eventos, entonces borramos los nans
@@ -89,3 +92,26 @@ for f, h0, hf in zip(fechas, hora0, horaf):
 dff["fechahora"] = dt0 #añadiendo nueva columna
 dff["duracion"] = deltat #igual
 dff.to_csv("data/manual.csv", index = False) #guardando archivo
+
+
+## CREANDO ARCHIVO DE SOLO OBSERVADORES POR DIA
+# util para acumulados
+# asumiendo que en los casos que la lluvia 
+dff2 = dff2[["fecha", "observador"]]
+observadores = []; fechas = []; bandera = []
+for i in dff2.fecha.unique():
+    aux = dff2[dff2.fecha == i]
+    if len(aux) > 1:
+        if len(aux.observador.unique()) > 1:
+            flg = 1
+        else:
+            flg = 0
+    else:
+        flg = 0
+    obs = aux.observador.to_list()[0]
+    fechas.append(i)
+    observadores.append(obs)
+    bandera.append(flg)
+
+df3 = pd.DataFrame(list(zip(fechas, observadores, bandera)), columns = ["fecha", "observador", "mult_obs"])
+df3.to_csv("outputs/observador_por_dia.csv", index = False)

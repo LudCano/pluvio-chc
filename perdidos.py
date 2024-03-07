@@ -46,9 +46,14 @@ def create_dts(start, duration):
 
     return dts
 
-
-#def evento(idx0, idxf):
-
+obs_data = pd.read_csv("outputs/observador_por_dia.csv")
+obs_d = pd.to_datetime(obs_data.fecha)
+obs_data["fecha_"] = [i.date() for i in obs_d]
+# recortando el df para hacer rápida la búsqueda
+def buscar_obser(fecha):
+    m = obs_data[obs_data.fecha_ == fecha]
+    obs = m.observador.to_list()[0]
+    return obs
 
 autom = automatico.copy()
     
@@ -59,15 +64,32 @@ for dmanual, duracion in zip(manual.fechahora, manual.duracion):
     
 autom.reset_index(inplace = True)
 autom = autom.iloc[:,1:]
-#autom.to_csv("prueba.csv")
-print(autom.head())
+autom.to_csv("prueba.csv")
+#print(autom.head())
 p = autom.precip.to_list()
-for i in range(len(p)):
+dateti = autom.fechahora.to_list()
+i = 0
+## OBTENIENDO INDICES DE EVENTOS QUE TIENEN PRECIP >0
+# obtenemos solamente los indices inicial y final, luego recortaremos
+acum_lost = []; duraciones = []; hora_ini = []; observador_lost = []
+while i <= len(p)-1:
     if p[i] > 0:
         idx0 = i
+        ac = p[i] #creado acumulado de la primera hora
         u = i
         while p[u] != 0:
             u = u + 1
+            ac = ac + p[u] # se suma a las horas de este evento
         idxf = u
         i = u
+        acum_lost.append(round(ac,1)) #acumulado sumado
+        duraciones.append(idxf-idx0) #NOTA: Duración es horas después de la hora inicial
+        hora_ini.append(dateti[idx0])
+        f = dateti[idx0].date()
+        o = buscar_obser(f)
+        observador_lost.append(o)
+    else:
+        i = i+1
 
+df2 = pd.DataFrame(list(zip(hora_ini, duraciones, acum_lost, observador_lost)), columns = ["fechahora", "duracion", "precip", "observador"])
+df2.to_csv("outputs/eventos_perdidos.csv", index = False)
