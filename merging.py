@@ -111,4 +111,5 @@ ax2.set_ylabel("p_obs - p_auto")
 ax2.set_title(f"Diferencia entre medidas + 1 hora\n{date_start} al {date_fin}")
 fig2.savefig("outputs/boxplot2.png")
 
+
 plt.show()
