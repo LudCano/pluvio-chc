@@ -27,6 +27,10 @@ if proc_again:
     ## TABLA FINAL
     from complete_proc import complete_table
     complete_table(date_start, date_fin)
+
+    ## ACUMULADOS DIARIOS
+    from daily_acum import daily_acum
+    daily_acum(date_start, date_fin)
 else:
     pass
 
