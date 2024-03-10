@@ -4,13 +4,14 @@ import pandas as pd
 date_start = "2023-01-01"
 date_fin = "2023-12-31"
 fname = "outputs/all_events.csv"
+recalc = False #si se desea recalcular de todas formas, se fuerza
 plot_boxes = True
 threshold = 1
 
 from check_cache import check_cache
 proc_again = check_cache(date_start, date_fin)
 
-if proc_again:
+if proc_again or recalc:
     ## PREPROCESO
     from procesamiento import *
     proc_automatic()
