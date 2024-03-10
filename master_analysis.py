@@ -5,7 +5,6 @@ date_start = "2023-01-01"
 date_fin = "2023-12-31"
 fname = "outputs/all_events.csv"
 plot_boxes = True
-plot_lost = False
 threshold = 1
 
 from check_cache import check_cache
@@ -23,7 +22,7 @@ if proc_again:
 
     ## EVENTOS PERDIDOS
     from perdidos import lost_events
-    lost_events(date_start, date_fin, plot_lost)
+    lost_events(date_start, date_fin, False)
 
     ## TABLA FINAL
     from complete_proc import complete_table
