@@ -80,7 +80,7 @@ def lost_events(date_start, date_fin, do_plot):
     i = 0
     ## OBTENIENDO INDICES DE EVENTOS QUE TIENEN PRECIP >0
     # obtenemos solamente los indices inicial y final, luego recortaremos
-    acum_lost = []; duraciones = []; hora_ini = []; observador_lost = []
+    acum_lost = []; duraciones = []; hora_ini = []; observador_lost = []; n_flag = []
     while i <= len(p)-1:
         if p[i] > 0:
             horaslst = [horati[i]]
@@ -98,8 +98,9 @@ def lost_events(date_start, date_fin, do_plot):
                 i = u
             idxf = u
             acum_lost.append(round(ac,1)) #acumulado sumado
-            duraciones.append(idxf-idx0+1) #NOTA: Duración es horas después de la hora inicial
+            duraciones.append(idxf-idx0) #NOTA: Duración es horas después de la hora inicial
             hora_ini.append(dateti[idx0])
+            n_flag.append(1)
             f = dateti[idx0].date()
             o = buscar_obser(f)
             observador_lost.append(o)
@@ -107,7 +108,7 @@ def lost_events(date_start, date_fin, do_plot):
         else:
             i = i+1
 
-    df2 = pd.DataFrame(list(zip(hora_ini, duraciones, acum_lost, observador_lost)), columns = ["fechahora", "duracion", "precip", "observador"])
+    df2 = pd.DataFrame(list(zip(hora_ini, duraciones, acum_lost, observador_lost, n_flag)), columns = ["fechahora", "duracion", "precip", "observador", "tipo"])
     df2.to_csv("outputs/eventos_perdidos.csv", index = False)
     if do_plot:
         bns = np.arange(min(duraciones), max(duraciones)+1, 1)

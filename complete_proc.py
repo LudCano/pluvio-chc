@@ -83,7 +83,7 @@ def complete_table(date_start, date_fin):
     i = 0
     ## OBTENIENDO TODOS LOS EVENTOS QUE NO HAN SIDO REGISTRADOS
     # obtenemos solamente los indices inicial y final, luego recortaremos
-    acum_lost = []; duraciones = []; hora_ini = []; observador_lost = []
+    acum_lost = []; duraciones = []; hora_ini = []; observador_lost = []; n_flag = []
     while i <= len(p)-1:
         horaslst = [horati[i]]
         flaglst = [get_flag(i, horati)]
@@ -100,11 +100,12 @@ def complete_table(date_start, date_fin):
             i = u
         idxf = u
         acum_lost.append(round(ac,1)) #acumulado sumado
-        duraciones.append(idxf-idx0+1) #NOTA: Duración es horas después de la hora inicial
+        duraciones.append(idxf-idx0) #NOTA: Duración es horas después de la hora inicial
         hora_ini.append(dateti[idx0])
         f = dateti[idx0].date()
         o = buscar_obser(f)
         observador_lost.append(o)
+        n_flag.append(2)
         i = u+1
 
 
@@ -113,19 +114,20 @@ def complete_table(date_start, date_fin):
     fchs = [i.date() for i in hora_ini]
     pluv = np.zeros(len(fchs))
 
-    df2 = pd.DataFrame(list(zip(fchs, hora_ini, duraciones, pluv, acum_lost, observador_lost)), columns = ["fecha", "fechahora", "duracion", "pluvio", "precip", "observador"])
+    df2 = pd.DataFrame(list(zip(fchs, hora_ini, duraciones, pluv, acum_lost, observador_lost, n_flag)), columns = ["fecha", "fechahora", "duracion", "pluvio", "precip", "observador", "tipo"])
     #print(df2.head())
     dflost = perdidos
     dflost["fecha"] = [i.date() for i in dflost.fechahora]
     dflost["pluvio"] = np.zeros(len(dflost.fecha))
     #print(dflost.head())
     dfmanual = manual.copy()
-    dfmanual = dfmanual[["fecha", "fechahora", "pluvio", "observador", "duracion"]]
-    dfmanual["precip"] = np.zeros(len(dfmanual.fecha))
+    dfmanual = dfmanual[["fecha", "fechahora", "pluvio", "observador", "duracion", "tipo"]]
+    dfmanual["precip"] = manual.acum
 
 
     dffinal = pd.concat([df2, dflost, dfmanual], axis = 0)
     dffinal.sort_values("fechahora", inplace = True)
+    dffinal["duracion"] = dffinal.duracion + 1
     dffinal.to_csv("outputs/all_events.csv", index = False)
 
     return

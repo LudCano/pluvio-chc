@@ -4,8 +4,8 @@ import pandas as pd
 date_start = "2023-01-01"
 date_fin = "2023-12-31"
 fname = "outputs/all_events.csv"
-recalc = False #si se desea recalcular de todas formas, se fuerza
-plot_boxes = True
+recalc = True #si se desea recalcular de todas formas, se fuerza
+plot_boxes = False
 threshold = 1
 
 from check_cache import check_cache
@@ -62,7 +62,7 @@ if plot_boxes:
     ax.set_xticklabels(names_wcount) #solo nombres
     ax.set_ylabel("p_obs - p_auto")
     ax.set_title(f"Diferencia entre medidas\n{date_start} al {date_fin}")
-    fig.savefig("outputs/boxplot1.png")
+    fig.savefig("figs/boxplot1.png")
 
 
     plt.show()

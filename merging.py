@@ -69,6 +69,7 @@ def merging(date_start, date_fin):
     pluviomanual = manual.pluvio.astype(float)
     manual["d_pluv"] = pluviomanual - manual.acum
     manual["d_pluv2"] = pluviomanual - manual.acum_m1
+    manual["tipo"] = 0
 
     # Guardando archivo final
     manual.to_csv("outputs/processed.csv", index = False)
