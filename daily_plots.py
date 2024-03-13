@@ -60,8 +60,8 @@ for i in d.mes.unique():
         idxf = idxs[k][1]
         idx0 = idxs[k][0]
         pha = np.zeros(len(a_dias[idx0:idxf])) + .125
-        ax[k].bar(a_dias[idx0:idxf] - pha, a_manual[idx0:idxf], color = "b", width = 0.25, label = "Manual")
-        ax[k].bar(a_dias[idx0:idxf] + pha, a_auto[idx0:idxf], color = "r", width = 0.25, label = "Automatico")
+        ax[k].bar(a_dias[idx0:idxf] - pha, a_manual[idx0:idxf], color = "g", width = 0.25, label = "Manual")
+        ax[k].bar(a_dias[idx0:idxf] + pha, a_auto[idx0:idxf], color = "darkviolet", width = 0.25, label = "Automatico")
     ax[0].legend()
     ax[0].set_title(title)
     fig.supylabel("mm Acumulado diario")
