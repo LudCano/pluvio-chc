@@ -77,11 +77,19 @@ def daily_acum(date_start, date_fin):
     dff = df2.merge(df3, how = "right", on = "dia")
     dff["manual"] = dff.manual.fillna(0)
 
+    flgg = []
+    for u, v in zip(dff.manual, dff.automatico):
+        if u == 0 and v == 0:
+            flgg.append(0)
+        else:
+            flgg.append(1)
+
     obs = pd.read_csv("outputs/observador_por_dia.csv")
     obs = obs[["fecha","observador"]]
     obs.columns = ["dia", "observador"]
     obs["dia"] = pd.to_datetime(obs.dia)
 
     dff2 = dff.merge(obs, how = "left", on="dia")
+    dff2["flg"] = flgg
     dff2.to_csv("outputs/daily_acum.csv", index = False)
     return
