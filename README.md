@@ -2,17 +2,45 @@
 
 # pluvio-chc
 Análisis de datos de comparación entre el pluviómetro manual y automático en CHC (Chacaltaya). Desarrollado y mantenido por: Ludving Adolfo Cano [lcano@chacaltaya.edu.bo](mailto:lcano@chacaltaya.edu.bo) , Tahis Belen Peñaloza [tpenaloza@chacaltaya.edu.bo](mailto:tpenaloza@chacaltaya.edu.bo)
-# Introduccion
-**
+## Introduccion
+- describes, dates,
+- outputs f
+- figures
+- structure
 
 ## Descripcion de los datos 
+Los datos fueron privada (automatic, manual repositorio observadores)
+data set dates
+variables
 
 ## Pre-procesamiento
+-procesamiento archivo manual 
+concatenamiento, uniformizacion
+procesamiento de fechas
+-procesamiento archivo autoomatico
+
+- archivo observadores
+
 
 ## Procesamiento
+
 ### 1. Obteniendo eventos manuales
+correlacion entre las tablas manual y automatico
+ajustes
+calculo de la direfencia de las medidas tomadas manual y automaticamente
+ademas de la medidas tomadas por observador
+
 ### 2. Eventos perdidos
+obtenemos los datos perdidos del automatico que no fueron registrados
+precip > 0
+horas perdidas que no se anotaron por el observador, duracion del evento
 ### 3. Tabla final
+ completando datode la tabla general
+- manual (proc) automatic (auto) observadores (observers) perdidos (perdidos)
+eventos no registrados
+data > manual >fecha	h0	hf	pluvio	observador	fechahora	duracion
+       auto>fecha,hora,precip,fechahora
+ 
 ### 4. Acumulados
 
 
