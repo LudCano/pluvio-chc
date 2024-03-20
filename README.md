@@ -42,7 +42,7 @@ data > manual >fecha	h0	hf	pluvio	observador	fechahora	duracion
        auto>fecha,hora,precip,fechahora
  
 ### 4. Acumulados
-
+obtenemos los datos del automatico que no han sido registrados 
 
 
 ## Productos
