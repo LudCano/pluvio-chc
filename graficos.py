@@ -28,6 +28,9 @@ cajas = []
 cajas2 = []
 o = []
 l_o = d.observador.dropna().unique()
+perdidos = []
+c = 1
+xx_a = []
 for i in l_o:
     if i == "nan":
         pass
@@ -35,10 +38,21 @@ for i in l_o:
         a = d[d.observador == i]
         aux = a.d.isna().sum()
         print(i, len(a), aux)
+        b = a[a.d.isna()]
+        if len(b)>0:
+            perdidos.append(b.manual.to_list())
+            print(b)
+            xx = [c for i in range(len(b))]
+            xx_a.append(xx)
         a = a.dropna()
         cajas.append(a.d.to_list())
         cajas2.append(a.d2.to_list())
         o.append(str(i) + " "+ str(aux))
+        c = c +1
+
+
+xx_b = sum(xx_a, [])
+todos_perdidos = sum(perdidos, [])
 
 
 fig2, ax2 = plt.subplots(2,1, sharex=True, height_ratios = [2,1], figsize = (6,5),dpi = 300)
@@ -46,6 +60,8 @@ plt.subplots_adjust(hspace=0)
 ax2[1].boxplot(cajas)
 ax2[0].boxplot(cajas2)
 ax2[0].axhline(y = 0, c = "b", alpha = .5, lw = .8)
+ax2[0].scatter(xx_b, todos_perdidos, c = "red", marker = "x", s = 15)
+
 ax2[0].set_ylabel("mm de diferencia (manual - auto)")
 ax2[1].set_ylabel("diferencia porcentual")
 ax2[0].set_title("Comparación medidas 2023 (acumulado diario)")

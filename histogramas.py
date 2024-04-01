@@ -1,7 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-
+import scienceplots
+plt.style.use(["science", "nature"])
 ## TIPOS DE EVENTO (columna "tipo")
 ## Tipo 0: Evento marcado manualmente (encontrado en pluvio manual)
 ## Tipo 1: Evento perdido (encontrado en pluvio automatico pero no manual)
@@ -15,16 +16,6 @@ d = d[(d.tipo == 0) | (d.tipo == 1)]
 #creando barras centradas en cada duración
 bins = np.arange(1, d.duracion.max() + 1.5) - 0.5
 
-"""
-fig, ax = plt.subplots(1,1, figsize = (8,6))
-ax.hist(d.duracion, bins = bins)
-ax.set_xticks(bins + 0.5)
-ax.set_xlabel("Duración de eventos")
-ax.set_ylabel("Cantidad de eventos")
-ax.set_title("Eventos marcados (0) y perdidos (1)")
-plt.show()
-"""
-
 dd = d[d.duracion == 11]
 print(dd)
 
@@ -33,8 +24,8 @@ print(dd)
 mx = max([d.precip.max(), d.pluvio.max()]) + 0.5
 mn = min([d.precip.min(), d.pluvio.min()]) - 0.5
 
-fig, ax = plt.subplots(3,1, figsize = (8,14), sharex=True)
-plt.subplots_adjust(hspace=0.1)
+fig, ax = plt.subplots(3,1, figsize = (6,10), sharex=True)
+plt.subplots_adjust(hspace=0.02)
 ax[0].hist(d.duracion, bins = bins)
 ax[0].set_ylabel("Cantidad")
 ax[1].scatter(d.duracion, d.pluvio)
@@ -45,7 +36,6 @@ ax[2].set_ylabel("mm (automatico)")
 ax[2].set_ylim(mn, mx)
 ax[2].set_xticks(bins + 0.5)
 ax[2].set_xlabel("Duración de eventos [horas]")
-#ax.set_ylabel("Cantidad de eventos")
 ax[0].set_title("Eventos marcados (0) y perdidos (1)")
 fig.savefig("figs/comparison_events.png", dpi = 300)
 plt.show()
