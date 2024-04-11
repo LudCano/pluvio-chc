@@ -2,7 +2,7 @@ import pandas as pd
 
 # Ruta final
 date_start = "2023-01-01"
-date_fin = "2023-12-31"
+date_fin = "2024-02-01"
 fname = "outputs/all_events.csv"
 recalc = True #si se desea recalcular de todas formas, se fuerza
 plot_boxes = False
@@ -16,6 +16,7 @@ if proc_again or recalc:
     from procesamiento import *
     proc_automatic()
     proc_manual()
+    proc_conico()
 
     ## OBTENIENDO EVENTOS MANUALES
     from merging import merging

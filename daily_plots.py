@@ -72,12 +72,14 @@ if plot_daily:
         fig.savefig(f"figs/daily_plots/{fname}", dpi = 300)
 #plt.show()
     
-
+a = np.cumsum(d.automatico)
+print(a.max())
 ### GRAFICO DE ACUMULADO DIARIO
 fig, ax = plt.subplots(1,1, figsize = (6,3))
 ax_date = mdates.date2num(d.fecha)
-ax.plot(ax_date, np.cumsum(d.manual), label = "Medida manual")
+ax.plot(ax_date, np.cumsum(d.manual), label = "Manual cilíndrica")
 ax.plot(ax_date, np.cumsum(d.automatico), label = "Medida automática")
+ax.plot(ax_date, np.cumsum(d.conico), label = "Manual cónico")
 ax.set_ylabel("Precipitado acumulado [mm]")
 ax.set_title("Comparación acumulados diarios")
 ax.legend()

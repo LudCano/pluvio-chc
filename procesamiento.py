@@ -138,5 +138,41 @@ def proc_automatic():
     d.to_csv(output, index = False)
     return
 
+
+
+def proc_conico():
+    ## PROCESAMIENTO DE DATOS DEL CÓNICO
+    fname = 'data/conic_pluvio_CHC_by_event.xlsx'
+    output = 'data/conico.csv'
+
+    # Librerias
+    import pandas as pd
+    import datetime as dt
+
+    # Lectura de datos
+    d = pd.read_excel(fname, sheet_name=None)
+
+    lst_sheets = []
+
+    for i in range(2021,2025):
+        aux = d[str(i)].copy()
+        lst_sheets.append(aux)
+
+    dff = pd.concat(lst_sheets, axis = 0)
+    dff.dropna(subset = ['HH_start'], inplace = True)
+    datestimes = []; precips = []
+    for i, j, k, l, p in zip(dff.YYYY_start, dff.MM_start, dff.DD_start, dff.HH_start,
+                             dff.Precip_amount_mm):
+        dd = dt.datetime(year = i, month=int(j), day=int(k), hour=int(l))
+        datestimes.append(dd)
+        precips.append(p)
+
+    df_conic = pd.DataFrame(list(zip(datestimes, precips)), columns=['fechahora', 'conico'])
+    manual = pd.read_csv('data/manual.csv')
+    manual['fechahora'] = pd.to_datetime(manual.fechahora)
+    
+    juntos = pd.merge(manual, df_conic, how = 'left', on = 'fechahora')
+    juntos.to_csv('data/manual.csv', index = False)
+
 if __name__ == "__main__":
-    proc_manual()
+    proc_conico()

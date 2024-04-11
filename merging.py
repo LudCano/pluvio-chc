@@ -29,6 +29,7 @@ def merging(date_start, date_fin):
     d0 = dt.datetime.strptime(date_start, "%Y-%m-%d")
     df = dt.datetime.strptime(date_fin, "%Y-%m-%d")
     manual = manual.loc[(manual.fechahora > d0) & (manual.fechahora < df)]
+    manual['conico'] = manual.conico.fillna(0)
     automatico = automatico.loc[(automatico.fechahora > d0) & (automatico.fechahora < df)]
     automatico.reset_index(inplace = True)
     ## ---------------------------------------
@@ -67,8 +68,9 @@ def merging(date_start, date_fin):
 
     # Calculamos ambas diferencias
     pluviomanual = manual.pluvio.astype(float)
+    conicmanual = manual.conico.astype(float)
     manual["d_pluv"] = pluviomanual - manual.acum
-    manual["d_pluv2"] = pluviomanual - manual.acum_m1
+    manual["d_conic"] = conicmanual - manual.acum
     manual["tipo"] = 0
 
     # Guardando archivo final
@@ -83,10 +85,11 @@ def merging(date_start, date_fin):
         print(j, len(aux))
         if len(aux) >= threshold:
             bxdata.append(aux.d_pluv)
-            bxdata2.append(aux.d_pluv2)
+            bxdata2.append(aux.d_conic)
             names_wcount.append(f"{j}-{len(aux)}")
             obs_names.append(j)
 
-
     return
 
+if __name__ == '__main__':
+    merging('2023-01-01', '2024-02-10')

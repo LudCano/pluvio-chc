@@ -51,7 +51,7 @@ def daily_acum(date_start, date_fin):
             fechas.append(f)
 
     dia = [i.date() for i in fechas]
-    df2 = pd.DataFrame(list(zip(m.fechahora,dia,m.pluvio)), columns = ["fecha","dia","manual"])
+    df2 = pd.DataFrame(list(zip(m.fechahora,dia,m.pluvio,m.conico)), columns = ["fecha","dia","manual",'conico'])
     df2 = df2.groupby("dia").sum()
     df2.reset_index(inplace=True)
     df2["dia"] = pd.to_datetime(df2.dia)
@@ -76,6 +76,7 @@ def daily_acum(date_start, date_fin):
 
     dff = df2.merge(df3, how = "right", on = "dia")
     dff["manual"] = dff.manual.fillna(0)
+    dff["conico"] = dff.conico.fillna(0)
 
     flgg = []
     for u, v in zip(dff.manual, dff.automatico):
