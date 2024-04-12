@@ -12,10 +12,10 @@ filter_outlier = True
 do_plots = False
 
 # Incongruent dates, check manually
-#f = open('dates_check.txt', 'w+')
-#print(d[d.conico == 0], file = f)
-#print("----OUTLIERS---", file = f)
-#print(d[(d.d_pluv < -10) | (d.d_conic < -10)], file = f)
+f = open('dates_check2.txt', 'w+')
+print(d[d.conico == 0], file = f)
+print("----OUTLIERS---", file = f)
+print(d[(d.d_pluv < -10) | (d.d_conic < -10)], file = f)
 
 if filter_outlier:
     d = d[(d.d_pluv > -10) & (d.d_conic > -10)]

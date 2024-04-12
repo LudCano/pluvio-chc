@@ -168,6 +168,7 @@ def proc_conico():
         precips.append(p)
 
     df_conic = pd.DataFrame(list(zip(datestimes, precips)), columns=['fechahora', 'conico'])
+    df_conic.to_csv('solo_conico.csv', index = False)
     manual = pd.read_csv('data/manual.csv')
     manual['fechahora'] = pd.to_datetime(manual.fechahora)
     

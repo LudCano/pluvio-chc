@@ -1,0 +1,26 @@
+WilcoxonResult(statistic=0.0, pvalue=0.15729920705028502)
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                 pluvio   R-squared:                       1.000
+Model:                            OLS   Adj. R-squared:                  1.000
+Method:                 Least Squares   F-statistic:                 5.184e+32
+Date:                vie, 12 abr 2024   Prob (F-statistic):          3.47e-191
+Time:                        14:10:28   Log-Likelihood:                 496.51
+No. Observations:                  14   AIC:                            -989.0
+Df Residuals:                      12   BIC:                            -987.7
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const       4.996e-17   2.99e-17      1.672      0.120   -1.51e-17    1.15e-16
+conico         1.1250   4.94e-17   2.28e+16      0.000       1.125       1.125
+==============================================================================
+Omnibus:                       16.487   Durbin-Watson:                   2.302
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               12.461
+Skew:                           2.041   Prob(JB):                      0.00197
+Kurtosis:                       5.167   Cond. No.                         1.92
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.

@@ -121,12 +121,12 @@ def complete_table(date_start, date_fin):
     dflost["pluvio"] = np.zeros(len(dflost.fecha))
     #print(dflost.head())
     dfmanual = manual.copy()
-    dfmanual = dfmanual[["fecha", "fechahora", "pluvio", "observador", "duracion", "tipo"]]
+    dfmanual = dfmanual[["fecha", "fechahora", "pluvio", "conico","observador", "duracion", "tipo"]]
     dfmanual["precip"] = manual.acum
-
-
+    
     dffinal = pd.concat([df2, dflost, dfmanual], axis = 0)
     dffinal.sort_values("fechahora", inplace = True)
+    dffinal['conico'] = dffinal.conico.fillna(0)
     dffinal["duracion"] = dffinal.duracion + 1
     dffinal.to_csv("outputs/all_events.csv", index = False)
 

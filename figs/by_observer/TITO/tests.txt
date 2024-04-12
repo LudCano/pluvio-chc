@@ -1,0 +1,52 @@
+WilcoxonResult(statistic=112.0, pvalue=0.01304669438755094)
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             diferencia   R-squared:                       0.974
+Model:                            OLS   Adj. R-squared:                  0.974
+Method:                 Least Squares   F-statistic:                     3274.
+Date:                vie, 12 abr 2024   Prob (F-statistic):           2.09e-71
+Time:                        14:03:40   Log-Likelihood:                -51.843
+No. Observations:                  90   AIC:                             107.7
+Df Residuals:                      88   BIC:                             112.7
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+const              0.0858      0.049      1.745      0.085      -0.012       0.183
+diferenciaconi     0.9861      0.017     57.221      0.000       0.952       1.020
+==============================================================================
+Omnibus:                      133.259   Durbin-Watson:                   2.097
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             4061.175
+Skew:                           5.193   Prob(JB):                         0.00
+Kurtosis:                      34.227   Cond. No.                         3.11
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+WilcoxonResult(statistic=112.0, pvalue=0.01304669438755094)
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:             diferencia   R-squared:                       0.974
+Model:                            OLS   Adj. R-squared:                  0.974
+Method:                 Least Squares   F-statistic:                     3274.
+Date:                vie, 12 abr 2024   Prob (F-statistic):           2.09e-71
+Time:                        14:10:28   Log-Likelihood:                -51.843
+No. Observations:                  90   AIC:                             107.7
+Df Residuals:                      88   BIC:                             112.7
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P>|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+const              0.0858      0.049      1.745      0.085      -0.012       0.183
+diferenciaconi     0.9861      0.017     57.221      0.000       0.952       1.020
+==============================================================================
+Omnibus:                      133.259   Durbin-Watson:                   2.097
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):             4061.175
+Skew:                           5.193   Prob(JB):                         0.00
+Kurtosis:                      34.227   Cond. No.                         3.11
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
